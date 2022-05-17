@@ -6,7 +6,7 @@ const methodOverride = require('method-override');
 
 // importing routers
 const mainRouter = require('./routes/api/index.js')
-// const productRouter = require('./routes/api/products.js');
+const productsRouter = require('./routes/api/products.js');
 
 // express instance
 const app = express();
@@ -20,6 +20,7 @@ app.use(methodOverride('_method'));
 
 // config global routes
 app.use("/", mainRouter);
+app.use("/api/products", productsRouter)
 
 // setting PORT
 const PORT = 3001;
