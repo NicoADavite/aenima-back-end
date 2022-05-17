@@ -1,8 +1,8 @@
-module.export = {
+module.exports = {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "database_development",
+    "password": '',
+    "database": "aenima_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
@@ -15,8 +15,8 @@ module.export = {
   },
   "production": {
     "username": "root",
-    "password": null,
-    "database": "database_production",
+    "password": '',
+    "database": "aenima_db",
     "host": "127.0.0.1",
     "dialect": "mysql"
   }

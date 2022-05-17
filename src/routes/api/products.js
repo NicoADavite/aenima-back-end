@@ -13,7 +13,7 @@ router.post("/store", productController.store);
 // router.put("/update/:id", upload.single("image"), productController.update);
 router.put("/update/:id", productController.update);
 
-router.delete("/delete", productController.destroy);
+router.delete("/delete/:id", productController.destroy);
 
 router.post("/search", productController.searchByName);
 

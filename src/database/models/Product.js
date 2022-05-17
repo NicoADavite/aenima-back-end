@@ -14,25 +14,29 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         description: {
-            type: DataTypes.STRING(1000),
+            type: DataTypes.STRING(3000),
             allowNull: false
         },
         image: {
-            type: DataTypes.STRING(100),
+            type: DataTypes.STRING(1000),
             allowNull: false
         },
         price: {
-            type: DataTypes.INTEGER(10).UNSIGNED,
+            type: DataTypes.FLOAT(10,10).UNSIGNED,
+            allowNull: false
+        },
+        brand: {
+            type: DataTypes.STRING(45),
             allowNull: false
         }
     };
 
     let config = {
-        tableName: 'products',        
+        tableName: 'productos',        
         timestamps: false
     };
 
     const Product = sequelize.define(alias, cols, config);
     
-    return Product
+    return Product;
 }

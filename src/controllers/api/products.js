@@ -1,4 +1,4 @@
-const db = require('../../database/models');
+const db = require('../../database/models/index');
 const Op = db.Sequelize.Op;
 
 
@@ -8,15 +8,24 @@ const productController = {
 
         try {
 
-            const productsArray = await db.products.findAll();
+            const productsArray = await db.Product.findAll();
+
+            const productsArrayWithUrl = productsArray.map( product => {
+                let editedProduct = {
+                     ...product.dataValues,
+                     url: `/api/products/${product.id}`,
+                     imageUrl: `/images/products/${product.image}`
+                }
+                return editedProduct;
+            })
     
             const response = {
                 meta: {
                     status: 200,
                     message: "Success! Products founded!",
-                    length: productsArray.length
+                    length: productsArrayWithUrl.length
                 },
-                data: productsArray
+                data: productsArrayWithUrl
             }
 
             res.status(200).json(response);
@@ -27,7 +36,6 @@ const productController = {
             
         }
 
-
     },
 
     detail: async (req, res) => {
@@ -36,16 +44,18 @@ const productController = {
 
         try {
 
-            const productById = await db.Product.findById(id);
+            const productById = await db.Product.findByPk(id);
 
             const response = {                
                 meta: {
                     status: 200,
                     message: 'Success! Product founded!',
-                    url: `/api/products/${id}`
+                    // url: `/api/products/${id}`
                 },
                 data: {
-                    ...productById
+                    ...productById.dataValues,
+                    url: `/api/products/${id}`,
+                    imageUrl: `/images/products/${productById.image}`
                 }
             }
 
@@ -65,7 +75,7 @@ const productController = {
 
             const productCreated = await db.Product.create({
                 ...req.body,
-                url: `/api/products/${req.body.id}`
+                price: parseFloat(req.body.price)
             });
 
             let response = {
@@ -73,7 +83,7 @@ const productController = {
                     status: 200,
                     message: 'Success! Product Created!',
                     created: true,
-                    url: productCreated.url
+                    // url: productCreated.url
                 },
                 data: productCreated
             }
@@ -97,11 +107,12 @@ const productController = {
             const productUpdated = await db.Product.update(
                 {
                     ...req.body,
-                    url: `/api/products/${id}`
+                    price: parseFloat(req.body.price),
+                    // url: `/api/products/${id}`
                 },
                 {
                     where: {
-                        id
+                        id: id
                     }
                 }
             );
@@ -111,10 +122,12 @@ const productController = {
                     status: 201,
                     message: 'Success! Product Updated!',
                     updated: true,
-                    url: productUpdated.url
+                    // url: productUpdated.url
                 },
                 data: productUpdated
             }
+
+            res.status(201).json(response);
             
         } catch (error) {
             
@@ -170,14 +183,23 @@ const productController = {
                 }
             );
 
+            const searchedProductsWithUrl = searchedProducts.map(searchedProduct => {
+                const editedProduct = {
+                    ...searchedProduct.dataValues,
+                    url: `/api/products/${searchedProduct.id}`,
+                    imageUrl: `/images/products/${searchedProduct.image}`
+                }
+                return editedProduct;
+            })
+
             let response = {
                 meta: {
                     status: 200,
                     message: 'Success! Searched Products Founded',
                     founded: true,
-                    length: searchedProducts.length
+                    length: searchedProductsWithUrl.length
                 },
-                data: searchedProducts
+                data: searchedProductsWithUrl
             }
 
             res.status(200).json(response);
