@@ -1,6 +1,6 @@
 // importing external packages
 const express = require('express');
-const cors = require('cors');
+// const cors = require('cors');
 // require('dotenv').config()
 const path = require('path');
 const methodOverride = require('method-override');
@@ -13,7 +13,7 @@ const productsRouter = require('./routes/api/products.js');
 const app = express();
 
 // config global middlewares
-app.use(cors());
+// app.use(cors());
 app.use(express.static(path.join(__dirname, '../public')))
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
