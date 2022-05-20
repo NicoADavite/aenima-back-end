@@ -1,7 +1,7 @@
 // importing external packages
 const express = require('express');
 const cors = require('cors');
-// require('dotenv').config()
+require('dotenv').config()
 const path = require('path');
 const methodOverride = require('method-override');
 
