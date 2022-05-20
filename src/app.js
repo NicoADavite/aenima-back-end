@@ -24,9 +24,8 @@ app.use("/", mainRouter);
 app.use("/api/products", productsRouter)
 
 // setting PORT
-const PORT = 3001;
+let port = process.env.PORT || 3001;
 
-// lifting server
-app.listen(PORT, () => {
-    console.log(`Server running on http://localhost:${PORT}`);
-})
+app.listen(port, ()=>{
+    console.log(`Servidor funcionando ${port}`); //
+});
