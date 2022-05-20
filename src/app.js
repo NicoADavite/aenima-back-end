@@ -1,8 +1,8 @@
 // importing external packages
 const express = require('express');
-require('dotenv').config()
-const path = require('path');
 const cors = require('cors');
+// require('dotenv').config()
+const path = require('path');
 const methodOverride = require('method-override');
 
 // importing routers
