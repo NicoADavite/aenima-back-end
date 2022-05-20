@@ -19,9 +19,15 @@ app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(methodOverride('_method'));
 
+
+const corsOptions = {
+    origin: 'http://localhost:3000/',
+    optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
+}
+
 // config global routes
 app.use("/", mainRouter);
-app.use("/api/products", productsRouter)
+app.use("/api/products", cors(corsOptions), productsRouter)
 
 // setting PORT
 let port = process.env.PORT || 3001;
