@@ -12,8 +12,8 @@ const productsRouter = require('./routes/api/products.js');
 const app = express();
 
 // config global middlewares
-app.use(express.static(path.join(__dirname, '../public')))
 app.use(cors());
+app.use(express.static(path.join(__dirname, '../public')))
 app.use(express.urlencoded({extended: false}));
 app.use(express.json());
 app.use(methodOverride('_method'));
