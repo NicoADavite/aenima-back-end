@@ -1,6 +1,7 @@
 // importing external packages
 const express = require('express');
 const cors = require('cors');
+const http = require('http');
 // require('dotenv').config()
 const path = require('path');
 const methodOverride = require('method-override');
@@ -22,6 +23,11 @@ app.use(methodOverride('_method'));
 // config global routes
 app.use("/", mainRouter);
 app.use("/api/products", productsRouter)
+
+// mantener despierto el server de heroku
+setInterval(function() {
+    http.get("http://aenima-back-end.herokuapp.com");
+}, 1440000);
 
 // setting PORT
 let port = process.env.PORT || 3001;
