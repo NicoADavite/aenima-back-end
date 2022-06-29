@@ -6,7 +6,7 @@
     version: "0.0.1",
     tools: "Node.js, Express, Sequelize",
     "scripts": {
-        "start": "nodemon src/app.js"
+        "start": "node src/app.js"
     }
     
 ```
